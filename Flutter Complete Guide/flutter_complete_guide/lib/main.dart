@@ -22,27 +22,27 @@ class _MyAppState extends State<MyApp> {
       'questionText': 'Whats your favorite football team?',
       'answers': [
         {'text': 'Liverpool', 'score': 10},
-        {'text': 'Manchester City', 'score': 07},
-        {'text': 'Bayern Munich', 'score': 05},
-        {'text': 'Real Madrid', 'score': 03},
+        {'text': 'Manchester City', 'score': 7},
+        {'text': 'Bayern Munich', 'score': 5},
+        {'text': 'Real Madrid', 'score': 3},
       ]
     },
     {
       'questionText': 'Whats your favorite color?',
       'answers': [
         {'text': 'Red', 'score': 10},
-        {'text': 'Blue', 'score': 08},
-        {'text': 'Green', 'score': 05},
-        {'text': 'Yellow', 'score': 03},
+        {'text': 'Blue', 'score': 8},
+        {'text': 'Green', 'score': 5},
+        {'text': 'Yellow', 'score': 3},
       ],
     },
     {
       'questionText': 'Whats your favorite animal?',
       'answers': [
-        {'text': 'Tiger', 'score': 10},
-        {'text': 'Rabbit', 'score': 07},
-        {'text': 'Elephant', 'score': 06},
-        {'text': 'Snake', 'score': 05},
+        {'text': 'Tiger', 'score': 0},
+        {'text': 'Rabbit', 'score': 7},
+        {'text': 'Elephant', 'score': 6},
+        {'text': 'Snake', 'score': 5},
       ],
     },
   ];
