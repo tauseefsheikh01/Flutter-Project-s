@@ -1,19 +1,22 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/result.dart';
+
 import './quiz.dart';
+import './result.dart';
+// void main() {
+//   runApp(MyApp());
+// }
 
-void main() => runApp(const _MyApp());
+void main() => runApp(MyApp());
 
-class _MyApp extends StatefulWidget {
-  const _MyApp();
-
+class MyApp extends StatefulWidget {
   @override
-  State<_MyApp> createState() => _MyAppState();
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyAppState();
+  }
 }
 
-class _MyAppState extends State<_MyApp> {
+class _MyAppState extends State<MyApp> {
   final _questions = const [
     {
       'questionText': 'Whats your favorite football team?',
@@ -43,28 +46,45 @@ class _MyAppState extends State<_MyApp> {
       ],
     },
   ];
-
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
+  void _answerQuestion(int score) {
+    // var aBool = true;
+    // aBool = false;
+
+    _totalScore += score;
+
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
     print(_questionIndex);
     if (_questionIndex < _questions.length) {
-      print('we have more Questions!');
+      print('We have more questions!');
     } else {
-      print('No more Questions! ');
+      print('No more questions!');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // var dummy = const ['Hello'];
+    // dummy.add('Max');
+    // print(dummy);
+    // dummy = [];
+    // questions = []; // does not work if questions is a const
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text('My First App')),
+          title: Text('My First App'),
         ),
         body: _questionIndex < _questions.length
             ? Quiz(
@@ -72,7 +92,7 @@ class _MyAppState extends State<_MyApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : const Result(),
+            : Result(_totalScore, _resetQuiz),
       ),
     );
   }
