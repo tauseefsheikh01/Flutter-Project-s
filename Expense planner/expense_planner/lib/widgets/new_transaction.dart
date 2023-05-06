@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
-  const NewTransaction({super.key, required this.addTx});
+  const NewTransaction({
+    super.key,
+    required this.addTx,
+  });
 
   final Function addTx;
 
@@ -16,13 +19,17 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime? selectedDate;
 
   void submitData() {
+    if (amountController.text.isEmpty) {
+      return;
+    }
+
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || selectedDate == null) {
       return;
     }
-    widget.addTx(enteredTitle, enteredAmount);
+    widget.addTx(enteredTitle, enteredAmount, selectedDate);
     Navigator.of(context).pop();
   }
 
@@ -45,7 +52,7 @@ class _NewTransactionState extends State<NewTransaction> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: 8,
       child: Container(
         padding: const EdgeInsets.all(10),
         child: Column(
@@ -63,16 +70,18 @@ class _NewTransactionState extends State<NewTransaction> {
               onSubmitted: (_) => submitData(),
             ),
             SizedBox(
-              height: 70,
+              height: 50,
               child: Row(
                 children: [
-                  Text(
-                    selectedDate == null
-                        ? 'No Data Chosen!'
-                        : DateFormat.yMd().format(selectedDate!),
+                  Expanded(
+                    child: Text(
+                      selectedDate == null
+                          ? 'No Data Chosen!'
+                          : 'Picked Date: ${DateFormat.yMd().format(selectedDate!)}',
+                    ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   ElevatedButton(
                     style: ButtonStyle(

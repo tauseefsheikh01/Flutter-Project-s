@@ -3,14 +3,16 @@ import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList({super.key, required this.transactions});
+  const TransactionList(
+      {super.key, required this.transactions, required this.deleteTx});
 
   final List<Transaction> transactions;
+  final Function deleteTx;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 500,
       child: transactions.isEmpty
           ? Column(
               children: [
@@ -27,7 +29,7 @@ class TransactionList extends StatelessWidget {
                 SizedBox(
                   height: 200,
                   child: Image.asset(
-                    'assets/fonts/images/waiting.png',
+                    'assets/fonts/images/notfound.gif',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -36,13 +38,14 @@ class TransactionList extends StatelessWidget {
           : ListView.builder(
               itemBuilder: (ctx, index) {
                 return Card(
+                  elevation: 8,
                   margin: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 5,
+                    vertical: 10,
+                    horizontal: 8,
                   ),
                   child: ListTile(
                     leading: CircleAvatar(
-                      radius: 30,
+                      radius: 35,
                       child: Padding(
                         padding: const EdgeInsets.all(5),
                         child: FittedBox(
@@ -52,11 +55,16 @@ class TransactionList extends StatelessWidget {
                     ),
                     title: Text(
                       transactions[index].title.toString(),
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     subtitle: Text(
-                      DateFormat.yMMMd()
+                      DateFormat.yMMMMd()
                           .format(transactions[index].date as DateTime),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Colors.red,
+                      onPressed: () => deleteTx(transactions[index].id),
                     ),
                   ),
                 );
@@ -88,9 +96,9 @@ class TransactionList extends StatelessWidget {
 //                         padding: const EdgeInsets.all(10.0),
 //                         child: Text(
 //                           '\$${transactions[index].amount?.toStringAsFixed(2)}',
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                             fontSize: 20,
+                          // style: TextStyle(
+                          //   fontWeight: FontWeight.bold,
+                          //   fontSize: 20,
 //                             color: Theme.of(context).primaryColor,
 //                           ),
 //                         ),

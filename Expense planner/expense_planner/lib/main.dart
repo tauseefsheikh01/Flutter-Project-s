@@ -19,8 +19,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Flutter App',
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(secondary: Colors.amber),
           fontFamily: 'QuickSand',
           appBarTheme: AppBarTheme(
             toolbarTextStyle: ThemeData.light()
@@ -45,7 +43,10 @@ class _MyAppState extends State<MyApp> {
                   ),
                 )
                 .titleLarge,
-          )),
+          ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+              .copyWith(secondary: Colors.amber)
+              .copyWith(error: Colors.red)),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
     );
@@ -61,18 +62,24 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'New Shoes',
-    //   amount: 69.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't1',
+      title: 'New Shoes',
+      amount: 69.99,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Weekly Groceries',
+      amount: 40.50,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't3',
+      title: 'Demo',
+      amount: 20.55,
+      date: DateTime.now(),
+    ),
   ];
 
   List<Transaction> get recentTransactions {
@@ -85,11 +92,12 @@ class MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
@@ -113,9 +121,16 @@ class MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  void deleteTransaction(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) => tx.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Center(child: Text('Expense Planner')),
         actions: <Widget>[
@@ -133,6 +148,7 @@ class MyHomePageState extends State<MyHomePage> {
             Chart(recentTransactions: recentTransactions),
             TransactionList(
               transactions: _userTransactions,
+              deleteTx: deleteTransaction,
             ),
           ],
         ),

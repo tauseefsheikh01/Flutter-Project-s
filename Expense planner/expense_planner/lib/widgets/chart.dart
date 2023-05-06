@@ -32,12 +32,12 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 6,
+      elevation: 8,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: groupedTransactionValues.map((data) {
           return Container(
-            color: Theme.of(context).primaryColorLight,
+            color: Theme.of(context).secondaryHeaderColor,
             child: FittedBox(
               child: Text('${data['day']}; ${data['amount']}'),
             ),
