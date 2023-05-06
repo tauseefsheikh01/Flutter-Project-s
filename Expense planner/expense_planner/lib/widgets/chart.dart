@@ -26,23 +26,24 @@ class Chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum,
       };
-    });
+    }).reversed.toList();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: groupedTransactionValues.map((data) {
-          return Text('${data['day']}; ${data['amount']}');
+          return Container(
+            color: Theme.of(context).primaryColorLight,
+            child: FittedBox(
+              child: Text('${data['day']}; ${data['amount']}'),
+            ),
+          );
         }).toList(),
       ),
     );
   }
 }
-
-
