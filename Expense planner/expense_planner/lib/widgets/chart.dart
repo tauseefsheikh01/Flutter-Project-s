@@ -33,16 +33,16 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 8,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: groupedTransactionValues.map((data) {
-          return Container(
-            color: Theme.of(context).secondaryHeaderColor,
-            child: FittedBox(
+      child: Container(
+        color: Colors.yellow.shade200,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: groupedTransactionValues.map((data) {
+            return FittedBox(
               child: Text('${data['day']}; ${data['amount']}'),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
