@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import './dummy_data.dart';
+
 class CategoriesMealsScreen extends StatelessWidget {
-  const CategoriesMealsScreen({
-    super.key,
-  });
+  const CategoriesMealsScreen({super.key});
+
+  static const routeName = './category-meals';
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +17,9 @@ class CategoriesMealsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(categoryTitle!),
       ),
-      body: const Center(
-        child: Text(
-          'The recipes for the categories',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
+      body: ListView.builder(itemBuilder: (ctx, index) {
+      
+      }, itemCount: ,),
     );
   }
 }
