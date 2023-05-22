@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/meals.dart';
 
 class MealsItem extends StatelessWidget {
@@ -15,6 +16,33 @@ class MealsItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+
+  String get textComplexity {
+    switch (complexity) {
+      case Complexity.challenging:
+        return 'Challenging';
+      case Complexity.simple:
+        return 'Simple';
+      case Complexity.hard:
+        return 'Hard';
+
+      default:
+        return 'unknown';
+    }
+  }
+
+  String get textAffordability {
+    switch (affordability) {
+      case Affordability.affordable:
+        return 'Affordable';
+      case Affordability.luxurious:
+        return 'Expensive';
+      case Affordability.pricey:
+        return 'Pricey';
+      default:
+        return 'unknown';
+    }
+  }
 
   void selectMeal() {}
 
@@ -44,7 +72,67 @@ class MealsItem extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
+                Positioned(
+                  bottom: 20,
+                  right: 10,
+                  child: Container(
+                    width: 300,
+                    color: Colors.black54,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                      ),
+                      softWrap: true,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ),
+                ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.schedule,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text('$duration min')
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.work,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(textComplexity),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.attach_money,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(textAffordability),
+                    ],
+                  )
+                ],
+              ),
             ),
           ],
         ),
