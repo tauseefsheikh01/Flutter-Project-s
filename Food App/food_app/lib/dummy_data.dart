@@ -24,7 +24,7 @@ const dummyCategories = [
   ),
   Category(
     id: 'c4',
-    title: 'Indian',
+    title: 'German',
     color: Colors.amber,
   ),
   Category(
@@ -54,18 +54,8 @@ const dummyCategories = [
   ),
   Category(
     id: 'c10',
-    title: 'Chinese',
-    color: Colors.teal,
-  ),
-  Category(
-    id: 'c11',
-    title: 'German',
-    color: Colors.purpleAccent,
-  ),
-  Category(
-    id: 'c12',
     title: 'Summer',
-    color: Colors.orangeAccent,
+    color: Colors.teal,
   ),
 ];
 
